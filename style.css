@@ -557,3 +557,33 @@ section { padding: 5rem 0; }
   .cards { grid-template-columns: 1fr; }
   .site-header .wrap { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
 }
+
+
+/* ===== Walkthrough videos ===== */
+.walkthrough { margin: 1.1rem 0 0; }
+.walkthrough video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.walkthrough figcaption { margin-top: 0.4rem; font-size: 0.85rem; color: var(--muted); }
+
+/* On wide screens an opened card spans the full row, so the video plays at a readable size.
+   (Browsers without :has() simply keep the narrow card.) */
+@media (min-width: 861px) {
+  .cards > li:has(.more[open]) { grid-column: 1 / -1; }
+  .cards > li:has(.more[open]) .card {
+    display: grid;
+    grid-template-columns: minmax(240px, 0.75fr) 1.6fr;
+  }
+  .cards > li:has(.more[open]) .card .shot {
+    align-self: start;
+    border-right: 1px dashed #3a5a8c;
+  }
+}
+
+/* A real screenshot fills the whole image area */
+.card .shot:has(img) { padding: 0; }
